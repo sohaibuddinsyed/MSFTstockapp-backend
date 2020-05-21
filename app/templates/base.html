@@ -1,0 +1,31 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="base.css">
+    <link src="index.js>"
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-left">
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/about">Working</a></li>
+          </ul>
+        </nav>
+      </div>
+      {% block body %}
+      {% endblock %}
+      <footer class="footer">
+        <p>© 2020 Syed Sohaib Uddin</p>
+      </footer>
+    </div> <!-- /container -->
+  </body>
+</html>

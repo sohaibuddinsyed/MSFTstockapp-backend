@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <marquee style="
+        font-size: 20px;
+        font-weight: 200;
+        color: blue;
+        font-family: sans-serif;
+        ">{{marketnow}}</marquee>
+  <h1>Stock Market Prediction</h1>
+  <p class="lead">Market Watch for MSFT at {{currentdatetime}} localtime. <br>Open : {{open}} <br>High : {{high}} 
+    <br>Low : {{low}} <br>Close : {{close}} </p>
+  
+  <form action='/' method="post">
+    
+    Do you wish to predict stock price as per current market trends or want to provide your inputs on future trend? <br>
+   
+    <fieldset>
+        <script>
+            $(".radioyes").click(function() {
+    $this.find(".option")
+      .css("display", "none")
+      
+  });
+  $(".radiono").click(function() {
+    $this.find(".option")
+      .css("display", "block");
+      
+  });
+        </script>
+        <input type="radio" class="radioyes"name="option" onsubmit=$click()  value="yes" required><label for="yes">yes</label>
+        <input type="radio" class="radiono" name="option" onsubmit=$click() value="no">
+        <label for="no">no</label><br>
+        Date <input type="datetime-local" style="display: block" name="datetime" required><br>
+        Open <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="open" ><br>
+        High <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="high"><br>
+        Low <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="low"><br>
+        Close <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="close"><br>
+        <input type="submit" style="display: block;"value="submit">
+
+    </fieldset>
+   
+    
+  </form>
+  <h1>Prediction for stock values at : {{preddatetime}}</h1>
+  <p class="lead">Prediction : {{prediction}}</p>
+</div>
+{% endblock %}
