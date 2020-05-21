@@ -192,7 +192,7 @@ def index():
             print(json.loads(error.read().decode("utf8", 'ignore')))
 
                 
-    return render_template("index.html", currentdatetime=x.strftime("%d %B, %Y at %I:%M %p") ,preddatetime=resultlist[0], open= resultlist[1], high= resultlist[2], low= resultlist[3], close= resultlist[4], prediction= resultlist[5], currentopen=latest_values[1], currenthigh=latest_values[2], currentlow=latest_values[3], current_close=latest_values[4], marketnow=latest_values[5])
+    return render_template("index.html", currentdatetime=datetime.now().strftime("%d %B, %Y at %I:%M %p") ,preddatetime=resultlist[0], open= resultlist[1], high= resultlist[2], low= resultlist[3], close= resultlist[4], prediction= resultlist[5], currentopen=latest_values[1], currenthigh=latest_values[2], currentlow=latest_values[3], current_close=latest_values[4], marketnow=latest_values[5])
 
 @app.route('/about')
 def about():

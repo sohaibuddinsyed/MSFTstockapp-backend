@@ -11,38 +11,28 @@
         color: blue;
         font-family: sans-serif;
         ">{{marketnow}}</marquee>
-  <p class="lead">Market Watch for MSFT on <span class="lead" style="color: blue;">{{currentdatetime}}</span> localtime. <br>Open : {{open}} <br>High : <span class="lead" style="color: green;">{{high}} </span>
-    <br>Low :  <span class="lead" style="color: red;">{{low}} </span><br>Close : {{close}} </p>
+  <h4 >Market Watch for MSFT on <span class="lead" style="color: blue;">{{currentdatetime}}</span> localtime. <br>Open : {{open}} <br>High : <span class="lead" style="color: green;">{{high}} </span>
+    <br>Low :  <span class="lead" style="color: red;">{{low}} </span><br>Close : {{close}} </h4>
   
   <form action='/' method="post">
-    
-    Do you wish to predict stock price as per current market trends or want to provide your inputs on future trend? <br>
+    <br><br>
+    <h4>Do you wish to predict stock price as per current market trends or want to provide your inputs on future trend?</h4>
    
     <fieldset>
-        <script>
-            $(".radioyes").click(function() {
-    $this.find(".option")
-      .css("display", "none")
-      
-  });
-  $(".radiono").click(function() {
-    $this.find(".option")
-      .css("display", "block");
-      
-  });
-        </script>
-        <input type="radio" class="radioyes"name="option" onsubmit=$click()  value="yes" required><label for="yes">yes</label>
-        <input type="radio" class="radiono" name="option" onsubmit=$click() value="no">
-        <label for="no">no</label><br>
-        Date and time at which you want to predict the stock value <input type="datetime-local" style="display: block" name="datetime" required><br>
+        
+        <input type="radio" class="radioyes"name="option"  style="width: 2em; height: 2em;" value="yes" required><label for="yes"><h2> Yes &nbsp;&nbsp;&nbsp;</h2></label>
+        <input type="radio" class="radiono" name="option"  style="width: 2em; height: 2em;" value="no">
+        <label for="no"><h2> No </h2></label><br><br>
+        <h4>Date and time at which you want to predict the stock value </h4><input type="datetime-local" style="display: block" name="datetime" required><br>
         <br>
-        <h4>***Enter the fields below only if you choose 'No' as your choice from the Radio option.
-        </h4>
+        <h3>***Enter the fields below only if you choose 'No' as your choice from the Radio option.
+          **If you choose 'Yes', click on Predict directly
+        </h3>
          <br>
-        Open <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="open" ><br>
-        High <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="high"><br>
-        Low <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="low"><br>
-        Close <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="close"><br>
+       <h4>Open</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="open" ><br>
+        <h4>High</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="high"><br>
+        <h4>Low</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="low"><br>
+        <h4>Close</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="close"><br>
         <button type="submit" style="display: block;" value="submit"><h3>Predict</h3></button>
 
     </fieldset>
@@ -50,6 +40,6 @@
     
   </form>
   <h2>Prediction for stock values at : {{preddatetime}}</h2>
-  <h3 class="lead">MSFT stock : {{prediction}}</h3>
+  <h3 >MSFT stock : <span style="color:darkgreen;">{{prediction}}</span></h3>
 </div>
 {% endblock %}
