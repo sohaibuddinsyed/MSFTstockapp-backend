@@ -11,15 +11,33 @@
     color: blue;
     font-family: sans-serif;
     "><h4>{{marketnow}}</h4></marquee></h4>
-  <h4 >Market Watch for MSFT on <span class="lead" style="color: blue;">{{currentdatetime}}</span> localtime. <br>Open : {{open}} <br>High : <span class="lead" style="color: green;">{{high}} </span>
-    <br>Low :  <span class="lead" style="color: red;">{{low}} </span><br>Close : {{close}} </h4>
+  <h4 >Market Watch for MSFT on <span class="lead" style="color: blue;">{{currentdatetime}}</span> localtime. 
+    
+    {% if marketopenview is none %}
+
+    <br>Open : {{open}} <br>
+    High : <span class="lead" style="color: green;">{{high}} </span><br>
+    Low :  <span class="lead" style="color: red;">{{low}} </span><br>
+    Close : {{close}} </h4>
+    {% endif %}
+
+    {% if marketopenview is not none %}
+
+    <br><h2> Current stockValue MSFT :<span class="lead" style="color: green;"><h2>{{open}}</h2></span>  
+    </h2>
+   
+    {% endif %}
+    {% if custominput is none %}
+    <h4 style="color:darkmagenta;">***The above value denotes your Open stock value since you provided your custom input.  </h4>
+    {% endif %}
+
+
   
   <form action='/' method="post">
     <br><br>
     <h4>Do you wish to predict stock price as per current market trends or want to provide your inputs on future trend?</h4>
    
     <fieldset>
-        
         <input type="radio" class="radioyes"name="option"  style="width: 2em; height: 2em;" value="yes" required><label for="yes"><h2> Yes &nbsp;&nbsp;&nbsp;</h2></label>
         <input type="radio" class="radiono" name="option"  style="width: 2em; height: 2em;" value="no">
         <label for="no"><h2> No </h2></label><br><br>
@@ -29,17 +47,17 @@
           **If you choose 'Yes', click on Predict directly
         </h3>
          <br>
-       <h4>Open</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="open" ><br>
-        <h4>High</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="high"><br>
-        <h4>Low</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="low"><br>
-        <h4>Close</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="close"><br>
+       <h4>Openning value</h4><input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="open" ><br>
+        <h4>Highest value intraday</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="high"><br>
+        <h4>Low value intraday</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'  name="low"><br>
+        <h4>Closing value</h4> <input class="option"type="number" style="display: block;"step='0.01'  placeholder='0.00'   name="close"><br>
         <button type="submit" style="display: block;" value="submit"><h3>Predict</h3></button>
 
     </fieldset>
    
     
   </form>
-  <h2>Prediction for stock values at : {{preddatetime}}</h2>
-  <h3 >MSFT stock : <span style="color:darkgreen;">{{prediction}}</span></h3>
+  <h2>Showing prediction for stock values at : {{preddatetime}}</h2>
+  <h4>Max value:</h4><h1 > <span style="color:darkgreen;">{{prediction}}</span></h1>
 </div>
 {% endblock %}

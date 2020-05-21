@@ -43,13 +43,14 @@ headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_ke
 
 
 @app.route('/', methods=['GET','POST'])
-def index():
+def index(): 
 
     #response list from server
     resultlist= ['','','','','','']
     #current values from yfinance (also has adj close and volume)
     latest_values= ['','','','','','']
-
+    marketopen=None
+    custominput=None
     
     if request.method == 'POST':
         
@@ -57,7 +58,7 @@ def index():
         x=datetime.now()
         date_N_days_ago = datetime.now() - timedelta(days=7)
         msft = yf.Ticker("MSFT")
-        data_df = yf.download("MSFT", start=date_N_days_ago.strftime("%Y"+"-"+"%m"+"-"+"%d"), interval="15m", end=x.strftime("%Y"+"-"+"%m"+"-"+"%d"))
+        data_df = yf.download("MSFT", start=date_N_days_ago.strftime("%Y"+"-"+"%m"+"-"+"%d"), interval="1m", end=x.strftime("%Y"+"-"+"%m"+"-"+"%d"))
         # data_df= yf.download("MSFT",start="2000-01-01",end="2006-01-01")
         data_df.to_csv('ds.csv')
 
@@ -124,17 +125,22 @@ def index():
         print(latest_values[1])
         
         usa_time=((latest_values[0].split())[1].split('-'))[0]
-        if usa_time > "09:00:00" and usa_time < "16:00:00" :
-            latest_values[5]="Market Closed. Showing MSFT stock values from last closing on "+(latest_values[0].split())[0]+" at "+usa_time+" NY local time."
+       
+        if usa_time > str("09:00:00") and usa_time < str("16:00:00") :
+            latest_values[5] = "Market Open. Showing current trends at "+usa_time+" NY local time."
         else:
-            latest_values[5]="Market Open. Showing current trends at "+usa_time
-
+           latest_values[5] = "Market Closed. Showing MSFT stock values from last closing on "+(latest_values[0].split())[0]+" at "+usa_time+" NY local time."
+        
+        marketopen = (usa_time > str("09:00:00") and usa_time < str("16:00:00"))
+        if  marketopen == False:
+            marketopen=None
         # latest_datetime=latest_values[0]
         # latest_open=latest_values[1]
         # latest_high=latest_values[2]
         # latest_low=latest_values[3]
         # latest_close=latest_values[4]
         if request.form["option"] == "yes":
+            custominput=None
             data = {
                 "Inputs": {
                     "WebServiceInput0":
@@ -191,8 +197,10 @@ def index():
             print(error.info())
             print(json.loads(error.read().decode("utf8", 'ignore')))
 
-                
-    return render_template("index.html", currentdatetime=datetime.now().strftime("%d %B, %Y at %I:%M %p") ,preddatetime=resultlist[0], open= resultlist[1], high= resultlist[2], low= resultlist[3], close= resultlist[4], prediction= resultlist[5], currentopen=latest_values[1], currenthigh=latest_values[2], currentlow=latest_values[3], current_close=latest_values[4], marketnow=latest_values[5])
+              
+    return render_template("index.html", currentdatetime=datetime.now().strftime("%d %B, %Y at %I:%M %p") ,preddatetime=resultlist[0], open= resultlist[1], high= resultlist[2], low= resultlist[3], close= resultlist[4], prediction= resultlist[5], currentopen=latest_values[1], currenthigh=latest_values[2], currentlow=latest_values[3], current_close=latest_values[4], marketnow=latest_values[5], marketopenview=marketopen, custominput=custominput)
+
+
 
 @app.route('/about')
 def about():
