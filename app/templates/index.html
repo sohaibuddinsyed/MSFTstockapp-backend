@@ -1,6 +1,6 @@
 
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}StockApp{% endblock %}
 {% block body %}
 <div class="jumbotron">
     
@@ -11,8 +11,8 @@
         color: blue;
         font-family: sans-serif;
         ">{{marketnow}}</marquee>
-  <p class="lead">Market Watch for MSFT on <span class="lead" style="color: blue;">{{currentdatetime}}</span> localtime. <br>Open : {{open}} <br>High : {{high}} 
-    <br>Low : {{low}} <br>Close : {{close}} </p>
+  <p class="lead">Market Watch for MSFT on <span class="lead" style="color: blue;">{{currentdatetime}}</span> localtime. <br>Open : {{open}} <br>High : <span class="lead" style="color: green;">{{high}} </span>
+    <br>Low :  <span class="lead" style="color: red;">{{low}} </span><br>Close : {{close}} </p>
   
   <form action='/' method="post">
     
