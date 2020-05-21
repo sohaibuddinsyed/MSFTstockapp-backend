@@ -125,9 +125,9 @@ def index():
         
         usa_time=((latest_values[0].split())[1].split('-'))[0]
         if usa_time > "09:00:00" and usa_time < "16:00:00" :
-            latest_values[5]="Market Closed. Showing MSFT stock values at "+usa_time+" UTC"
+            latest_values[5]="Market Closed. Showing MSFT stock values from last closing on "+(latest_values[0].split())[0]+" at "+usa_time+" NY local time."
         else:
-            latest_values[5]="Market Open. Showing current trends."
+            latest_values[5]="Market Open. Showing current trends at "+usa_time
 
         # latest_datetime=latest_values[0]
         # latest_open=latest_values[1]
@@ -192,7 +192,7 @@ def index():
             print(json.loads(error.read().decode("utf8", 'ignore')))
 
                 
-    return render_template("index.html", currentdatetime=str(datetime.now()) ,preddatetime=resultlist[0], open= resultlist[1], high= resultlist[2], low= resultlist[3], close= resultlist[4], prediction= resultlist[5], currentopen=latest_values[1], currenthigh=latest_values[2], currentlow=latest_values[3], current_close=latest_values[4], marketnow=latest_values[5])
+    return render_template("index.html", currentdatetime=x.strftime("%d %B, %Y at %I:%M %p") ,preddatetime=resultlist[0], open= resultlist[1], high= resultlist[2], low= resultlist[3], close= resultlist[4], prediction= resultlist[5], currentopen=latest_values[1], currenthigh=latest_values[2], currentlow=latest_values[3], current_close=latest_values[4], marketnow=latest_values[5])
 
 @app.route('/about')
 def about():
